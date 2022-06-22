@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+sudo pkill -f /usr/sbin/tailscale || true
+sudo pkill -f /usr/sbin/tailscaled || true
+
+sudo /etc/init.d/tailscaled start &
+
+# echo restarting docker so it gets tailscale routes
+# until ! pgrep dockerd; do
+#   sudo pkill dockerd
+# done
+# (sudo dockerd > /tmp/dockerd.log 2>&1) &
+# until docker ps > /dev/null; do
+#   printf .
+# done
+# echo ""
