@@ -47,7 +47,7 @@ case "$1" in
                 --netfilter-mode=off \
                 --accept-routes \
                 --hostname=${CODESPACE_NAME} \
-                --operator=${GITHUB_USER}
+                --operator=codespace
             log_end_msg 0 || true
         else
             log_end_msg 1 || true
