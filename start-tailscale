@@ -4,7 +4,7 @@ set -e
 sudo pkill -f /usr/sbin/tailscale || true
 sudo pkill -f /usr/sbin/tailscaled || true
 
-sudo /etc/init.d/tailscaled start &
+( sudo /etc/init.d/tailscaled start 2>&1 | sudo tee /var/log/tailscale.log ) &
 
 # echo restarting docker so it gets tailscale routes
 # until ! pgrep dockerd; do
