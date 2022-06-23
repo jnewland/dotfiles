@@ -37,13 +37,8 @@ case "$1" in
         if start-stop-daemon --start --quiet --oknodo --chuid 0:0 --pidfile /run/tailscaled.pid --background \
                 --exec /usr/sbin/tailscaled -- --state=/var/lib/tailscale/tailscaled.state \
                 --socket=/run/tailscale/tailscaled.sock --port 41641; then
-            AUTHKEY=""
-            if [ -n "${TAILSCALE_AUTH}" ]; then
-                echo ${TAILSCALE_AUTH} > /run/tailscale.key
-                AUTHKEY="file:/run/tailscale.key"
-            fi
             tailscale up \
-                --authkey=${AUTHKEY} \
+                --state=mem: \
                 --netfilter-mode=off \
                 --accept-routes \
                 --hostname=${CODESPACE_NAME} \
