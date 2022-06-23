@@ -35,10 +35,9 @@ case "$1" in
   start)
         log_daemon_msg "Starting Tailscale VPN" "tailscaled" || true
         if start-stop-daemon --start --quiet --oknodo --chuid 0:0 --pidfile /run/tailscaled.pid --background \
-                --exec /usr/sbin/tailscaled -- --state=/var/lib/tailscale/tailscaled.state \
+                --exec /usr/sbin/tailscaled -- --state=mem: \
                 --socket=/run/tailscale/tailscaled.sock --port 41641; then
             tailscale up \
-                --state=mem: \
                 --netfilter-mode=off \
                 --accept-routes \
                 --hostname=${CODESPACE_NAME} \
