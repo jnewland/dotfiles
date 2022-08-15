@@ -5,9 +5,11 @@ SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "running setup.sh from https://github.com/jnewland/dotfiles"
 
-if ! grep -q $SCRIPTPATH/.bashrc ~/.bashrc; then
+if ! grep -q "$SCRIPTPATH/.bashrc" ~/.bashrc; then
   echo ". $SCRIPTPATH/.bashrc" >> ~/.bashrc
 fi
+
+cp "$SCRIPTPATH/.gitconfig" ~/.gitconfig
 
 mkdir -p ~/bin
 
